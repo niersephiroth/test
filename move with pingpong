@@ -1,0 +1,59 @@
+///1)
+public class MoveObject : MonoBehaviour
+{
+    public GameObject obj;
+    public Vector3 begin;
+    public Vector3 end;
+    public bool pingpong = false;
+    public bool start_pingpong = false;
+    private float duration = 0.0f; // 移动所需的总时间，单位为秒
+    private float passTime = 0.0f;
+
+    void move(GameObject gameObject, Vector3 begin, Vector3 end, float time, bool pingpong)
+    {
+        obj = gameObject;
+        this.begin = begin;
+        this.end = end;
+        duration = time;
+        this.pingpong = pingpong;
+        start_pingpong = false;
+    }
+
+    void Update()
+    {
+      if (passTime < duration && duration > 0)
+      {
+        passTime += Time.deltaTime;
+        if (passTime >= duration)
+        {
+          if (start_pingpong)
+            obj.transform.position = start;
+          else
+            obj.transform.position = end;
+          if (!pingpong || start_pingpong)
+            duration = 0.0f;
+          if (pingpong && !start_pingpong)
+          {
+            start_pingpong = true;
+            passTime = 0.0f;
+          }
+        }
+      }
+	    else
+	    {
+	      if (start_pingpong)
+	      {
+	        float t = passTime / duration;
+          obj.transform.position = Vector3.Lerp(end, begin, t);
+	      }
+ 	      else
+	      {
+          float t = passTime / duration;
+          obj.transform.position = Vector3.Lerp(begin, end, t);
+	      }
+	    }
+    }
+}
+
+///2)
+///在1)的基础上，添加canvasGroup组件，插值改变alpha的透明度即可。
