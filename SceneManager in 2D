@@ -1,5 +1,5 @@
 1、通过划分格子作为存储单位，每个存储单位抽象出一个data用来保存数据
-///抽象出格子数据的基类，后续有特殊数据可继承此基类
+///抽象出格子数据的基类，通过继承或重写实现格子数据的特殊化、拓展、个性化等
 public class GridData{}
 
 2、格子数据使用字典存储，方便快速查找。（分布不均匀所以不用数组）
@@ -15,10 +15,15 @@ public class GridManager
 }
 
 3、在显示范围内的更新gameObject和data（可适当扩大范围），不在范围内的只更新data
+//Controller模块实现表现层的刷新
 public class GridController
 {
   //控制可视范围内格子的gameobject，表现层刷新
   ViewGridUpdate(){}
-  //控制所有数据的刷新
-  GridDataUpdate(){}
+}
+//Module模块实现逻辑层的数据刷新
+public class GridModule{}
+{
+  //所有格子数据的刷新
+  GridDataUpdate()
 }
