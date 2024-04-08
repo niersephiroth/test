@@ -1,3 +1,24 @@
 1、通过划分格子作为存储单位，每个存储单位抽象出一个data用来保存数据
+///抽象出格子数据的基类，后续有特殊数据可继承此基类
+public class GridData{}
+
 2、格子数据使用字典存储，方便快速查找。（分布不均匀所以不用数组）
+///保存所有格子数据，可使用单例实现、静态方法实现
+///管理场景可视范围和刷新范围
+public class GridManager
+{
+  static Dictionary<int, GridData> GridDict;
+  //增删改查等方法
+
+  //每帧刷新可视范围和刷新范围，矩阵集合
+  ViewUpdate(){}
+}
+
 3、在显示范围内的更新gameObject和data（可适当扩大范围），不在范围内的只更新data
+public class GridController
+{
+  //控制可视范围内格子的gameobject，表现层刷新
+  ViewGridUpdate(){}
+  //控制所有数据的刷新
+  GridDataUpdate(){}
+}
